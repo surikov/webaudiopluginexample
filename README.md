@@ -1,5 +1,7 @@
 # webaudiopluginexample
 
+![adjustment.png](adjustment.png)
+
 # Examples of Web Audio Plugins for Minium Studio
 
 Documentation and screenplay:
@@ -8,7 +10,7 @@ Documentation and screenplay:
 How to publish your plugin to the public directory: 
 - create a new Issue at https://github.com/surikov/webaudiopluginexample/issues
 
-# Purpose
+# Problem
 
 I've seen many good music apps. They look beautiful and work well. But they all have one problem. You can't integrate them into any music editor to create music.
 
