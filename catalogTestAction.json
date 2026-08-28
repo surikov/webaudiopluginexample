@@ -1,0 +1,8 @@
+{
+	"label": "Test Action Plugin",
+	"purpose": "Action",
+	"kind": "",
+	"ui": "http://127.0.0.1:8080/action/ui4.html",
+	"evaluate": "",
+	"script": ""
+}

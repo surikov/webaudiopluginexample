@@ -1,0 +1,8 @@
+{
+	"label": "Test Filter Plugin",
+	"purpose": "Filter",
+	"kind": "tesFilterPluginV1_0",
+	"ui": "http://127.0.0.1:8080/filter/ui3.html",
+	"evaluate": "createNewTestFilterPlugin",
+	"script": "http://127.0.0.1:8080/filter/plugin3.js"
+}

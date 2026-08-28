@@ -1,0 +1,63 @@
+<html>
+
+<head>
+	<style>
+		body {
+			background: silver;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Test Action Plugin</h1>
+	<button onclick="transpose(+12);">Transpose Up</button>
+	<button onclick="transpose(-12);">Transpose Down</button>
+</body>
+<script>
+	let dialigId = '';
+	let project = null;
+	function transpose(nn) {
+		if (project.tracks.length > 0) {
+			let trackidx = 0;
+			if (project.farorder.length > 0) {
+				trackidx = project.farorder[0];
+			}
+			let track = project.tracks[trackidx];
+			for (let mm = 0; mm < track.measures.length; mm++) {
+				let measure = track.measures[mm];
+				for (let cc = 0; cc < measure.chords.length; cc++) {
+					let chord = measure.chords[cc];
+					let transposed = [];
+					for (let pp = 0; pp < chord.pitches.length; pp++) {
+						transposed.push(chord.pitches[pp] + nn);
+					}
+					chord.pitches = transposed;
+				}
+			}
+			postMessageToHost(true);
+		}
+	}
+
+	function onHostMessage(messageEvent) {
+		if (dialigId) {
+			if (messageEvent.data.hostData) {
+				project = messageEvent.data.hostData;
+			}
+		} else {
+			dialigId = messageEvent.data.hostData;
+		}
+	}
+
+	function postMessageToHost(done) {
+		window.parent.postMessage({
+			dialogID: dialigId,
+			pluginData: project,
+			done: done,
+			screenWait: false
+		}, '*');
+	}
+	window.addEventListener('message', onHostMessage, false);
+	postMessageToHost(false);
+</script>
+
+</html>

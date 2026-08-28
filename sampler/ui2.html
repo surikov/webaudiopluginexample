@@ -1,0 +1,59 @@
+<html>
+
+<head>
+	<style>
+		body {
+			background: silver;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Test Sampler Plugin</h1>
+	<p>Volume</p>
+	<p><input type="range" id="volumeslider" min="0" max="1" step="0.1" onchange="setVolume(this.value);" /></p>
+	<p>Pitch ratio</p>
+	<p><input type="range" id="pitchslider" min="0.25" max="3" step="0.1" onchange="setRatio(this.value);" /></p>
+</body>
+<script>
+	let dialigId = '';
+	let properties = {
+		volume: 0.7,
+		ratio: 1
+	};
+
+	function setRatio(rr) {
+		properties.ratio = rr;
+		postMessageToHost();
+	}
+
+	function setVolume(nn) {
+		properties.volume = nn;
+		postMessageToHost();
+	}
+
+	function onHostMessage(messageEvent) {
+		if (dialigId) {
+			if (messageEvent.data.hostData) {
+				properties = messageEvent.data.hostData;
+			}
+			document.getElementById('volumeslider').value = properties.volume;
+			document.getElementById('pitchslider').value = properties.ratio;
+		} else {
+			dialigId = messageEvent.data.hostData;
+		}
+	}
+
+	function postMessageToHost() {
+		window.parent.postMessage({
+			dialogID: dialigId,
+			pluginData: properties,
+			done: false,
+			screenWait: false
+		}, '*');
+	}
+	window.addEventListener('message', onHostMessage, false);
+	postMessageToHost();
+</script>
+
+</html>

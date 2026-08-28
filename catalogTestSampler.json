@@ -1,0 +1,8 @@
+{
+	"label": "Test Sampler Plugin",
+	"purpose": "Sampler",
+	"kind": "tesSamplerPluginV1_0",
+	"ui": "http://127.0.0.1:8080/sampler/ui2.html",
+	"evaluate": "createNewTestSamplerPlugin",
+	"script": "http://127.0.0.1:8080/sampler/plugin2.js"
+}

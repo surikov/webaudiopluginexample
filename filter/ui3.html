@@ -1,0 +1,51 @@
+<html>
+
+<head>
+	<style>
+		body {
+			background: silver;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Test Filter Plugin</h1>
+	<p>Flanger speed</p>
+	<p><input type="range" id="flangerslider" min="0.05" max="0.5" step="0.05" onchange="setSpeed(this.value);" /></p>
+</body>
+<script>
+	let dialigId = '';
+	let properties = {
+		speed: 0.25
+	};
+
+	function setSpeed(ss) {
+		properties.speed = ss;
+		postMessageToHost();
+	}
+
+	function onHostMessage(messageEvent) {
+		if (dialigId) {
+			if (messageEvent.data.hostData) {
+				properties = messageEvent.data.hostData;
+				setSpeed(properties.speed);
+			}
+			document.getElementById('flangerslider').value = properties.speed;
+		} else {
+			dialigId = messageEvent.data.hostData;
+		}
+	}
+
+	function postMessageToHost() {
+		window.parent.postMessage({
+			dialogID: dialigId,
+			pluginData: properties,
+			done: false,
+			screenWait: false
+		}, '*');
+	}
+	window.addEventListener('message', onHostMessage, false);
+	postMessageToHost();
+</script>
+
+</html>
