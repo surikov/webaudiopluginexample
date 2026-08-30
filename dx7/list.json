@@ -1,0 +1,8 @@
+{
+	"label": "Yamaha DX7 performer",
+	"purpose": "Performer",
+	"kind": "miniumDX7fmSynth1",
+	"ui": "http://127.0.0.1:8080/dx7ui.html",
+	"evaluate": "newDX7FMSynth1",
+	"script": "http://127.0.0.1:8080/dx7minium.js"
+}

@@ -1,0 +1,135 @@
+{
+    "algorithm1_32": 5,
+    "feedback0_7": 5,
+    "operators": [
+        {
+            "rates0_99": [
+                57,
+                88,
+                78,
+                40
+            ],
+            "levels0_99": [
+                99,
+                61,
+                99,
+                0
+            ],
+            "detune_7_7": 7,
+            "volumeLevel0_99": 99,
+            "constMode0_1": 0,
+            "freqCoarse0_31": 5,
+            "freqFine0_99": 1,
+            "enabled": true,
+            "velocitySens0_7": 0
+        },
+        {
+            "rates0_99": [
+                72,
+                70,
+                71,
+                39
+            ],
+            "levels0_99": [
+                99,
+                75,
+                99,
+                0
+            ],
+            "detune_7_7": 5,
+            "volumeLevel0_99": 78,
+            "constMode0_1": 0,
+            "freqCoarse0_31": 3,
+            "freqFine0_99": 1,
+            "enabled": true,
+            "velocitySens0_7": 1
+        },
+        {
+            "rates0_99": [
+                57,
+                88,
+                78,
+                40
+            ],
+            "levels0_99": [
+                99,
+                61,
+                99,
+                0
+            ],
+            "detune_7_7": -3,
+            "volumeLevel0_99": 99,
+            "constMode0_1": 0,
+            "freqCoarse0_31": 5,
+            "freqFine0_99": 0,
+            "enabled": true,
+            "velocitySens0_7": 0
+        },
+        {
+            "rates0_99": [
+                72,
+                70,
+                71,
+                39
+            ],
+            "levels0_99": [
+                99,
+                75,
+                99,
+                0
+            ],
+            "detune_7_7": -4,
+            "volumeLevel0_99": 81,
+            "constMode0_1": 0,
+            "freqCoarse0_31": 3,
+            "freqFine0_99": 0,
+            "enabled": true,
+            "velocitySens0_7": 1
+        },
+        {
+            "rates0_99": [
+                57,
+                88,
+                78,
+                40
+            ],
+            "levels0_99": [
+                99,
+                61,
+                99,
+                0
+            ],
+            "detune_7_7": 7,
+            "volumeLevel0_99": 99,
+            "constMode0_1": 0,
+            "freqCoarse0_31": 2,
+            "freqFine0_99": 0,
+            "enabled": true,
+            "velocitySens0_7": 0
+        },
+        {
+            "rates0_99": [
+                72,
+                70,
+                71,
+                35
+            ],
+            "levels0_99": [
+                99,
+                75,
+                99,
+                0
+            ],
+            "detune_7_7": 3,
+            "volumeLevel0_99": 89,
+            "constMode0_1": 0,
+            "freqCoarse0_31": 0,
+            "freqFine0_99": 0,
+            "enabled": true,
+            "velocitySens0_7": 0
+        }
+    ],
+    "name": "*PPG*Vol.4 / STEINBER.SYX",
+    "lfoPitchModDepth0_99": 19,
+    "lfoAmpModDepth0_99": 0
+}

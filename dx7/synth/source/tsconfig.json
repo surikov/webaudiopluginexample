@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		"target": "es2015",
+		"outFile": "../build/dx7minium.js"
+		,
+		"strictNullChecks": true,
+		"alwaysStrict": true,
+		"esModuleInterop": true,
+		"noResolve": false,
+		"noImplicitAny": false,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"sourceMap": true,
+		"experimentalDecorators": true,
+		"isolatedModules": false,
+		"module": "AMD",
+		"lib": [
+			"dom",
+			"es2015",
+			"es5"
+		],
+		"declaration": true,
+		"types": []
+	},
+	"files": [
+		"../../dx7aux/mzxbxapi/musicenginetypes.ts",
+		"../../dx7aux/mzxbxapi/musicenginedeclarations.ts",
+		"../../dx7aux/dx7types.ts",
+		
+		"dx7synth.ts"
+	]
+}

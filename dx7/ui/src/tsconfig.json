@@ -1,0 +1,34 @@
+{
+	"compilerOptions": {
+		"target": "es2019",
+		"outFile": "../rsc/dx7selector.js"
+		,
+		"strictNullChecks": true,
+		"alwaysStrict": true,
+		"esModuleInterop": true,
+		"noResolve": false,
+		"noImplicitAny": false,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"sourceMap": true,
+		"experimentalDecorators": true,
+		"isolatedModules": false,
+		"module": "AMD",
+		"lib": [
+			"dom",
+			"es2019",
+			"es5"
+		],
+		"declaration": true,
+		"types": []
+	},
+	"files": [
+		"../../dx7aux/mzxbxapi/musicenginetypes.ts",
+		"../../dx7aux/mzxbxapi/musicenginedeclarations.ts",
+		"../../dx7aux/dx7types.ts",
+		
+		"loadersys.ts",
+		"lib.ts",
+		"dx7ui.ts"	
+	]
+}

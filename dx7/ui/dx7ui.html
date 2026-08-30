@@ -1,0 +1,34 @@
+<html>
+
+<head>
+	<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no" />
+	<link rel="stylesheet" type="text/css" href="rsc/dx7theme.css">
+</head>
+
+<body>
+	<div class='rake'>
+		<input type="file" id="fileInput" style="display: none;">
+		<p>Yamaha DX7 library</p>
+		<p>
+			<span onclick='dx7ui.importFile();'>[ Import ]</span>
+			<br />
+			<span onclick='dx7ui.minusVolume();'>[-]</span> <span onclick='dx7ui.plusVolume();'>[+]</span> Volume:
+			<span id='volumeValue'>123</span>%
+			<br />
+			<span onclick='dx7ui.minusOctave();'>[-]</span> <span onclick='dx7ui.plusOctave();'>[+]</span> Transpose:
+			<span id='transposeValue'>?</span>
+		</p>
+		<p>Preset: <span id='presettitle'>presetName/fileName</span></p>
+		<div id='libpane'>
+			<ul id='liblist'>
+
+			</ul>
+		</div>
+	</div>
+</body>
+<script src='rsc/dx7selector.js'></script>
+<script>
+	let dx7ui = new DX7UI();
+</script>
+
+</html>
