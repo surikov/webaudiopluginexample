@@ -31,4 +31,5 @@ Yamaha DX7 появился в 1983г. За счёт широких возмож
 
 ## Заключение
 
-https://github.com/surikov/webaudiopluginexample
+https://github.com/surikov/webaudiopluginexample/tree/main/dx7
+
