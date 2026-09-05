@@ -21,7 +21,6 @@ class DX7UI {
 		this.fileInput.addEventListener('change', (changeEvent) => {
 			let file: File = changeEvent.target.files[0];
 			let fname: string = file.name.trim().toLowerCase();
-			//console.log(fname, file);
 			if (fname.endsWith('.syx')) {
 				this.importSys(file);
 			} else {
@@ -35,22 +34,8 @@ class DX7UI {
 					}
 				}
 			}
-			/*
-			let fileReder: FileReader = new FileReader();
-			fileReder.onload = () => {
-				let loader: DX7Loader = new DX7Loader();
-				loader.loadSyxFile(file, (dx7presets: DX7PresetData[]) => {
-					for (var ii = 0; ii < dx7presets.length; ii++) {
-						libDX7list.splice(0, 0, dx7presets[ii]);
-					}
-					me.renderLibList();
-				});
-			};
-			fileReder.readAsText(file);
-			*/
 		});
 		let loader: DX7Loader = new DX7Loader();
-		//this.preset = loader.convertDX7data(libDX7list[32]);
 		this.preset = allFMPresets[32];
 		this.titleText.innerHTML = this.preset.label;
 		this.renderLibList();
@@ -126,15 +111,12 @@ class DX7UI {
 				li.innerText = '' + (1 + ii) + '. ' + allFMPresets[ii].label;
 				let pid = ii;
 				li.onclick = () => {
-					//let loader: DX7Loader = new DX7Loader();
 					let selectedPreset: SynthPreset = allFMPresets[pid];
 					console.log(pid, selectedPreset);
 					me.preset = selectedPreset;
 					let par: FMParameter = {
 						volume: me.volumeValue, preset: me.preset
 					};
-					//var message: MZXBX_MessageToHost = { dialogID: me.id, pluginData: par, done: false, screenWait: false };
-					//window.parent.postMessage(message, '*');
 					this.sendPresetToHost(par);
 					this.titleText.innerHTML = me.preset.label;
 					this.resetTransposeLabel() ;

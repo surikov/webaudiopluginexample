@@ -6,62 +6,42 @@ class DX7Loader {
 		return speed;
 	}
 	durationDown(nn: number): number {
-		//let ss = this.scale99(nn);
-		//return 0.095 / ss;
-		//return 318 * Math.pow(2, (99 - nn) * 0.16) / Math.pow(2, 99 * 0.16)//+0.008;
-		//return 169 * Math.pow(2, (99 - nn) * 0.16) / Math.pow(2, 99 * 0.16)//+0.008;
 		return 169 * Math.pow(2, (99 - nn) * 0.16) / Math.pow(2, 99 * 0.16)//+0.008;
 	}
 	durationUp(nn: number): number {
-		//return  this.durationDown(nn)/4;
-		//return 38 * Math.pow(2, (99 - nn) * 0.16) / Math.pow(2, 99 * 0.16) //+0.0001;
 		return 24.9 * Math.pow(2, (99 - nn) * 0.16) / Math.pow(2, 99 * 0.16) //+0.0001;
 	}
 	levelRatio(nn: number): number {
 		return nn / 99;
-		//let ratio = Math.log(nn + 1) * 14 + nn;
-		//return ratio;
 	}
 	slopeDuration(r99: number, from99: number, to99: number): {
 		from: number;
 		to: number;
 		duration: number;
 	} {
-		//let fromRatio = this.levelRatio(from99);
-		//let toRatio = this.levelRatio(to99);
-		//let fullRatio = this.levelRatio(99);
 		let partDuration = Math.abs(this.levelRatio(from99) - this.levelRatio(to99)) / this.levelRatio(99);
 		let fullDuration = this.durationDown(r99);
 
 		if (from99 < to99) {
 			fullDuration = this.durationUp(r99);
 		}
-		//console.log(r99, 'partDuration', partDuration, 'fullDuration', fullDuration, '/', this.durationUp(r99), 'speed', this.scale99(r99));
-
 		let slope = {
 			duration: partDuration * fullDuration
 			, from: this.scale99(from99) / this.scale99(99)
 			, to: this.scale99(to99) / this.scale99(99)
 		};
-		//if(dump)console.log('slopeDuration', r99, 'from',from99,'to', to99, slope, fullDuration,'/', partDuration);
 		return slope;
 	}
 	convertDX7data(dx7preset: DX7PresetData): SynthPreset {
 		let modlev = 2.8;
 		let preset: SynthPreset = {
-			//label: dx7preset.name.trim() + '/' + fileName.trim()
 			label: dx7preset.name
-			//, connectionsInfo: this.matrixConnectionAlgorithmsDX7[dx7preset.algorithm1_32 - 1]
 			, mixID: dx7preset.algorithm1_32
 			, operators: []
 			, feedbackRatio: 0.075 * modlev * Math.pow(2, (dx7preset.feedback0_7 - 7))  //* 0.01 //0.4
 			, modulationRatio: modlev
 			, transpose: 0
 		};
-		/*let lfospeedval = dx7preset.lfoSpeed / 6 + 0.5;
-		if (dx7preset.lfoSpeed > 65) {
-			lfospeedval = 10 + (dx7preset.lfoSpeed - 66) / 1;
-		}*/
 		for (let ii = 0; ii < 6; ii++) {
 			let data = dx7preset.operators[ii];
 			let attackSlope = this.slopeDuration(data.rates0_99[0], data.levels0_99[3], data.levels0_99[0]);
@@ -75,7 +55,6 @@ class DX7Loader {
 				, volume: 0
 				, detune: data.detune_7_7
 				, envelope: {
-					//, attack: { value: attackSlope.to, duration: attackSlope.duration }
 					attack: {
 						values: [0
 							, 0.025 * attackSlope.to
@@ -85,7 +64,6 @@ class DX7Loader {
 							, attackSlope.to]
 						, duration: attackSlope.duration
 					}
-					//, decay: { value: decaySlope.to, duration: decaySlope.duration }
 					, decay: {
 						values: [attackSlope.to
 							, attackSlope.to - 0.65 * (attackSlope.to - decaySlope.to)
@@ -95,7 +73,6 @@ class DX7Loader {
 							, decaySlope.to]
 						, duration: decaySlope.duration
 					}
-					//, sustain: { value: sustainSlope.to, duration: sustainSlope.duration }
 					, sustain: {
 						values: [decaySlope.to
 							, decaySlope.to - 0.65 * (decaySlope.to - sustainSlope.to)
@@ -114,7 +91,6 @@ class DX7Loader {
 			operator.envelope.release = Math.max(0.005, operator.envelope.release);
 			operator.envelope.release = Math.min(3, operator.envelope.release);
 
-			//let pitchModDepthRatio = 1+this.pow2x(dx7preset.lfoPitchModDepth0_99 / 99, -4.5, 2, 1 / 4);
 			let freqRatio = 1 / (1 + dx7preset.lfoPitchModDepth0_99 / 99);
 			if (data.constMode0_1 > 0) {
 				operator.volume = 0.51 * Math.pow(2, data.volumeLevel0_99 * 0.125) / Math.pow(2, 99 * 0.125) * (1 - 0.2 * data.velocitySens0_7 / 7);
@@ -124,10 +100,7 @@ class DX7Loader {
 				let coarse = 0.5;
 				if (data.freqCoarse0_31) {
 					coarse = data.freqCoarse0_31
-					//operator.frequencyRatio = freqRatio * data.freqCoarse0_31 * (1 + data.freqFine0_99 / 100);
-				} //else {
-				//	operator.frequencyRatio = freqRatio * 0.5 * (1 + data.freqFine0_99 / 100);//0.5;
-				//}
+				}
 				operator.frequencyRatio = freqRatio * coarse * (1 + data.freqFine0_99 / 100);
 			}
 			operator.volume = operator.volume * (1 + dx7preset.lfoAmpModDepth0_99 / 99);
@@ -140,15 +113,10 @@ class DX7Loader {
 		let all: DX7PresetData[] = [];
 		reader.onload = () => {
 			let result: string = reader.result as string;
-			//console.log(from.name);
-			//let customPresets: DX7PresetData[] = [];
 			for (let ii = 0; ii < 32; ii++) {
 				let one: DX7PresetData = this.parseSysexData(result, ii, from.name);
-				//let preset: SynthPreset = this.convertDX7data(one);
-				//console.log(ii, preset);
 				all.push(one);
 			}
-			//console.log(customPresets);
 			onDone(all);
 		};
 		reader.onerror = (error) => {
@@ -185,15 +153,11 @@ class DX7Loader {
 		let all: SynthPreset[] = [];
 		reader.onload = () => {
 			let result: string = reader.result as string;
-			//console.log(from.name);
-			//let customPresets: DX7PresetData[] = [];
 			for (let ii = 0; ii < 32; ii++) {
 				let one: DX7PresetData = this.parseSysexData(result, ii, from.name);
 				let preset: SynthPreset = this.convertDX7data(one);
-				//console.log(ii, preset);
 				all.push(preset);
 			}
-			//console.log(customPresets);
 			onDone(all);
 		};
 		reader.onerror = (error) => {
@@ -226,7 +190,6 @@ class DX7Loader {
 				, freqCoarse0_31: Math.floor(oscData.charCodeAt(15) >> 1)
 				, freqFine0_99: oscData.charCodeAt(16)
 				, enabled: true
-				//, lfoAmpModSens_3_3: oscData.charCodeAt(13) & 3
 				, velocitySens0_7: oscData.charCodeAt(13) >> 2
 			};
 			operators.splice(0, 0, operator);
@@ -236,16 +199,9 @@ class DX7Loader {
 			feedback0_7: voiceData.charCodeAt(111) & 7,
 			operators: operators,
 			name: voiceData.substring(118, 128).trim() + ' / ' + filename,
-
-			//lfoSpeed: voiceData.charCodeAt(112),
-			//lfoDelay: voiceData.charCodeAt(113),
 			lfoPitchModDepth0_99: voiceData.charCodeAt(114),
 			lfoAmpModDepth0_99: voiceData.charCodeAt(115),//
-			//lfoPitchModSens: voiceData.charCodeAt(116) >> 4,
-			//lfoWaveform: Math.floor(voiceData.charCodeAt(116) >> 1) & 7,
-			//lfoSync: voiceData.charCodeAt(116) & 1,
 		};
-		//console.log('parseSysexData', patchId, preset);
 		return preset;
 	}
 }

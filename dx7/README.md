@@ -24,6 +24,8 @@ Yamaha DX7 появился в 1983г. За счёт широких возмож
 
 Весь код для воспроизведения звука заданного пресетом убирается в 300 строчек, посмотреть можно [тут - dx7synth.ts](https://github.com/surikov/webaudiopluginexample/blob/main/dx7/synth/source/dx7synth.ts)
 
+### Загрузка пресетов из файла
+
 Формат файлов картриджей с инструментами (обычно это *.syx) можно посмотреть здесь - https://github.com/asb2m10/dexed/blob/master/Documentation/sysex-format.txt
 
 Параметры пресетов зависят от используемых в DX7 микросхем и поэтому выглядят ужасно. Например так описываются параметры ADSR-огибающей
@@ -66,8 +68,23 @@ type SynthPreset = {
 
 ## Реализация
 
+jjjhhh
 
+<details>
 
+<summary>Tips for collapsed sections</summary>
+
+### You can add a header
+
+You can add text within a collapsed section.
+
+You can add an image or a code block, too.
+
+```ruby
+   puts "Hello World"
+```
+
+</details>
 
 
 
